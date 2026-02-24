@@ -35,3 +35,7 @@ output "hub_subnet_names" {
   description = "Names of all subnets in hub (from module)"
   value       = module.hub_network.hub_subnet_names
 }
+
+output "spoke1_vnet_id" {
+  value = module.spoke1.spoke_vnet_id
+}

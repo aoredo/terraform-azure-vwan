@@ -58,6 +58,28 @@ module "hub_network" {
   depends_on = [azurerm_resource_group.hub]
 }
 
+module "spoke1" {
+    source = "../modules/spoke"
+    
+    resource_group_name = azurerm_resource_group.hub.name
+    location            = var.region
+    spoke_name          = "vnet-spoke-1"
+    spoke_address_space = "10.1.0.0/16"
+
+    subnets = {
+      "workload" = {
+        address_prefix = "10.1.1.0/24" 
+        description    = "spoke 1"
+      }
+    }
+    tags = var.tags
+
+    depends_on = [azurerm_resource_group.hub]   
+
+}
+
+
+
 # ===== HOW TO USE THIS =====
 #
 # To reference outputs from a module:
